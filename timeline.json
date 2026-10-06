@@ -1,0 +1,36 @@
+{
+  "updated": "2026-10-06",
+  "range": { "start": "2026-10-01", "end": "2027-06-30" },
+  "lanes": [
+    { "id": "hol-lu", "label": "Holidays Luxembourg", "kind": "holiday" },
+    { "id": "hol-az", "label": "Holidays Azores", "kind": "holiday" },
+    { "id": "prep", "label": "Preparation", "kind": "project" },
+    { "id": "class", "label": "Project work", "kind": "project" },
+    { "id": "mob1", "label": "Mobility 1", "kind": "mobility" },
+    { "id": "mob2", "label": "Mobility 2", "kind": "mobility" }
+  ],
+  "events": [
+    { "lane": "hol-lu", "title": "All Saints", "start": "2026-10-31", "end": "2026-11-08" },
+    { "lane": "hol-lu", "title": "Christmas", "start": "2026-12-19", "end": "2027-01-03" },
+    { "lane": "hol-lu", "title": "Carnival", "start": "2027-02-06", "end": "2027-02-14" },
+    { "lane": "hol-lu", "title": "Easter", "start": "2027-03-27", "end": "2027-04-11" },
+    { "lane": "hol-lu", "title": "Whitsun", "start": "2027-05-29", "end": "2027-06-06" },
+
+    { "lane": "hol-az", "title": "Christmas", "start": "2026-12-21", "end": "2026-12-31" },
+    { "lane": "hol-az", "title": "Semester break", "start": "2027-01-25", "end": "2027-01-26" },
+    { "lane": "hol-az", "title": "Carnival", "start": "2027-02-08", "end": "2027-02-10" },
+    { "lane": "hol-az", "title": "Easter", "start": "2027-03-22", "end": "2027-04-02" },
+    { "lane": "hol-az", "title": "Azores Day (no classes)", "start": "2027-05-17", "end": "2027-05-17" },
+
+    { "lane": "prep", "title": "Building teams and student groups", "start": "2026-10-06", "end": "2026-11-08", "status": "confirmed", "key": true,
+      "note": "Both schools form their project teams and select their students. Set up a quick contact channel (WhatsApp)." },
+    { "lane": "class", "title": "Project work in class", "start": "2026-11-02", "end": "2027-06-11", "status": "confirmed", "key": true,
+      "note": "Students start working on the project in the first or second week of November." },
+    { "lane": "mob1", "title": "Option A · Ettelbruck → Terceira", "start": "2027-02-19", "end": "2027-02-28", "status": "proposed", "key": true,
+      "note": "Departure Friday 19 or Saturday 20 February, return Sunday 28 February 2027." },
+    { "lane": "mob1", "title": "Option B · Ettelbruck → Terceira", "start": "2027-02-26", "end": "2027-03-07", "status": "proposed", "key": true,
+      "note": "Departure Friday 26 or Saturday 27 February, return Sunday 7 March 2027." },
+    { "lane": "mob2", "title": "Terceira → Ettelbruck", "start": "2027-04-12", "end": "2027-05-15", "status": "window", "key": true,
+      "note": "About 8 students and 2 teachers, one week within this window. Includes a day trip to the European institutions in Brussels or Strasbourg." }
+  ]
+}
