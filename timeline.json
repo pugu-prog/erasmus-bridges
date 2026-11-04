@@ -4,10 +4,12 @@
   "lanes": [
     { "id": "hol-lu", "label": "Holidays Luxembourg", "kind": "holiday" },
     { "id": "hol-az", "label": "Holidays Azores", "kind": "holiday" },
+    { "id": "start", "label": "Getting started", "kind": "project" },
     { "id": "prep", "label": "Preparation", "kind": "project" },
     { "id": "class", "label": "Project work", "kind": "project" },
     { "id": "mob1", "label": "Mobility 1", "kind": "mobility" },
-    { "id": "mob2", "label": "Mobility 2", "kind": "mobility" }
+    { "id": "mob2", "label": "Mobility 2", "kind": "mobility" },
+    { "id": "results", "label": "Results", "kind": "project" }
   ],
   "events": [
     { "lane": "hol-lu", "title": "All Saints", "start": "2026-10-31", "end": "2026-11-08" },
@@ -22,13 +24,22 @@
     { "lane": "hol-az", "title": "Easter", "start": "2027-03-22", "end": "2027-04-02" },
     { "lane": "hol-az", "title": "Azores Day (no classes)", "start": "2027-05-17", "end": "2027-05-17" },
 
-    { "lane": "prep", "title": "Building teams and student groups", "start": "2026-10-06", "end": "2026-11-17", "status": "confirmed", "key": true,
-      "note": "Both schools form their project teams and select their students. At LTEtt the project is presented in all 5e classes from 9 to 13 November; students apply until Tuesday 17 November 2026. Set up a quick contact channel (WhatsApp)." },
-    { "lane": "class", "title": "Project work in class", "start": "2026-11-02", "end": "2027-06-11", "status": "confirmed", "key": true,
-      "note": "Students start working on the project in the first or second week of November." },
+    { "lane": "start", "title": "Project teams", "start": "2026-10-06", "end": "2026-11-08", "status": "confirmed",
+      "note": "Both schools form their project teams and plan the year. Set up a quick contact channel between the teachers." },
+    { "lane": "start", "title": "Class visits", "start": "2026-11-09", "end": "2026-11-13", "status": "confirmed", "key": true,
+      "note": "The LTEtt team presents the project in all 5e classes." },
+    { "lane": "start", "title": "Application deadline", "start": "2026-11-17", "end": "2026-11-17", "status": "confirmed", "key": true,
+      "note": "Tuesday 17 November 2026: last day for LTEtt students to apply. Each school then selects its group of about 8 students." },
+
+    { "lane": "prep", "title": "Virtual meetings and language tandems", "start": "2026-12-01", "end": "2027-04-16", "status": "proposed", "key": true,
+      "note": "Online meetings between the two groups and language tandems (Portuguese, French, German, English), at least six sessions per student. Students get to know each other before the visits and learn about EU cohesion policy. A short starting survey measures where everyone stands." },
+    { "lane": "class", "title": "Weekly project work (Wednesdays)", "start": "2026-11-18", "end": "2027-06-11", "status": "confirmed", "key": true,
+      "note": "At LTEtt the project is an extracurricular activity every Wednesday at lunchtime, starting Wednesday 18 November 2026. Students work on the three modules: multilingualism and careers, island vs. continent, sustainability and solidarity." },
     { "lane": "mob1", "title": "Terceira → Ettelbruck", "start": "2027-02-27", "end": "2027-03-06", "status": "confirmed", "key": true,
       "note": "Saturday 27 February to Saturday 6 March 2027. About 8 students and 2 teachers from the Azores stay with host families in Luxembourg. Includes a day at the European Parliament in Brussels." },
-    { "lane": "mob2", "title": "Ettelbruck → Terceira", "start": "2027-04-22", "end": "2027-04-30", "status": "proposed", "key": true,
-      "note": "End of April 2027. Proposed: Thursday 22 to Friday 30 April (flights via Lisbon). About 8 students and up to 3 teachers; host families on Terceira. Dates still to be confirmed by both schools." }
+    { "lane": "mob2", "title": "Ettelbruck → Terceira", "start": "2027-04-19", "end": "2027-05-07", "status": "window", "when": "Late April 2027", "key": true,
+      "note": "About 8 students and their teachers from LTEtt stay with host families on Terceira. The exact days are still to be confirmed by both schools." },
+    { "lane": "results", "title": "Evaluation and results", "start": "2027-05-10", "end": "2027-06-30", "status": "proposed", "key": true,
+      "note": "Final survey and evaluation. The students present their results: project portfolio, a multilingual guide, a digital exhibition and events at both schools." }
   ]
 }

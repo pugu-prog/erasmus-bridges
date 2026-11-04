@@ -95,7 +95,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
   <section id="timeline">
     <div class="wrap">
       <h2>Timeline</h2>
-      <p class="lead">Our plan for the school year, with the school holidays of both countries. Dates marked “proposed” still need to be confirmed by both schools.</p>
+      <p class="lead">Our plan for the school year, with the school holidays of both countries. Dates marked “proposed” or “date open” still need to be confirmed by both schools.</p>
       <div class="card">
         <div class="gantt-scroll"><svg id="gantt" role="img" aria-label="Project timeline October 2026 to June 2027"></svg></div>
         <div class="legend">
@@ -143,6 +143,14 @@ const NS = 'http://www.w3.org/2000/svg';
 const day = s => new Date(s + 'T00:00:00');
 const fmt = (d, o) => d.toLocaleDateString('en-GB', o);
 
+// "when" in timeline.json replaces the exact dates in the text (e.g. "Late April 2027")
+function when(v){
+  if (v.when) return v.when;
+  const a = day(v.start), b = day(v.end);
+  return v.start === v.end ? fmt(a, { day: 'numeric', month: 'short', year: 'numeric' })
+    : `${fmt(a, { day: 'numeric', month: 'short' })} – ${fmt(b, { day: 'numeric', month: 'short', year: 'numeric' })}`;
+}
+
 function el(tag, attrs, parent, text){
   const e = document.createElementNS(NS, tag);
   for (const k in attrs) e.setAttribute(k, attrs[k]);
@@ -159,14 +167,15 @@ function drawGantt(data){
   const X = d => L + ((day(d) - s) / 864e5) * (W - L - R) / span;
   const X2 = d => X(d) + (W - L - R) / span;
 
-  // stack overlapping events within a lane into sub-rows
+  // stack events within a lane into sub-rows when bars or their labels would overlap
   const rows = data.lanes.map(l => {
     const evs = data.events.filter(v => v.lane === l.id).sort((a, b) => a.start.localeCompare(b.start));
     const tracks = [];
     evs.forEach(v => {
-      let t = tracks.findIndex(end => end < v.start);
-      if (t < 0 || l.kind !== 'mobility') t = l.kind === 'mobility' ? tracks.length : 0;
-      tracks[t] = v.end; v._t = t;
+      const x = X(v.start), x2 = X2(v.end), tw = v.title.length * 7.2;
+      let t = l.kind === 'holiday' ? 0 : tracks.findIndex(end => end + 6 < x);
+      if (t < 0) t = tracks.length;
+      tracks[t] = Math.max(tracks[t] || 0, tw + 16 < x2 - x ? x2 : x2 + 8 + tw); v._t = t;
     });
     return { lane: l, evs, n: Math.max(1, tracks.length) };
   });
@@ -197,10 +206,11 @@ function drawGantt(data){
     el('text', { x: 0, y: r.y + h / 2 + 5, 'font-size': 13, 'font-weight': 500 }, svg, r.lane.label);
     r.evs.forEach(v => {
       const x = X(v.start), w = Math.max(3, X2(v.end) - x);
-      const bh = r.lane.kind === 'mobility' ? sub - 6 : h - 10;
-      const y = r.lane.kind === 'mobility' ? r.y + 4 + v._t * sub : r.y + 5;
+      const stacked = r.lane.kind === 'mobility' || r.n > 1;
+      const bh = stacked ? sub - 6 : h - 10;
+      const y = stacked ? r.y + 4 + v._t * sub : r.y + 5;
       const g = el('g', {}, svg);
-      el('title', {}, g, `${v.title}: ${fmt(day(v.start), { day: 'numeric', month: 'short' })} – ${fmt(day(v.end), { day: 'numeric', month: 'short', year: 'numeric' })}`);
+      el('title', {}, g, `${v.title}: ${when(v)}`);
       const fill = r.lane.kind === 'holiday' ? 'var(--hol)' : r.lane.kind === 'project' ? 'var(--eu)' : 'var(--sea)';
       const rect = { x, y, width: w, height: bh, rx: 3, fill };
       if (v.status === 'window') Object.assign(rect, { fill: 'var(--sea-soft)', stroke: 'var(--sea)', 'stroke-width': 1.5, 'stroke-dasharray': '5 3' });
@@ -225,12 +235,9 @@ function drawDates(data){
   const ul = document.getElementById('datelist');
   const status = { confirmed: 'confirmed', proposed: 'proposed', window: 'date open' };
   data.events.filter(v => v.key).sort((a, b) => a.start.localeCompare(b.start)).forEach(v => {
-    const a = day(v.start), b = day(v.end);
-    const range = v.start === v.end ? fmt(a, { day: 'numeric', month: 'short', year: 'numeric' })
-      : `${fmt(a, { day: 'numeric', month: 'short' })} – ${fmt(b, { day: 'numeric', month: 'short', year: 'numeric' })}`;
     const li = document.createElement('li');
     li.innerHTML = `<time></time><div><h3></h3><p></p></div>`;
-    li.querySelector('time').textContent = range;
+    li.querySelector('time').textContent = when(v);
     li.querySelector('h3').textContent = v.title;
     if (v.status){
       const s = document.createElement('span');
